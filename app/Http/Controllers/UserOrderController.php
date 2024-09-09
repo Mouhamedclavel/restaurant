@@ -16,4 +16,20 @@ class UserOrderController extends Controller
 
         return view('orders.index', compact('orders'));
     }
+
+    public function cancel(Order $order)
+    {
+        if ($order->user_id !== auth()->id()) {
+            return redirect()->route('user.orders')->with('error', 'Vous n\'êtes pas autorisé à annuler cette commande.');
+        }
+
+        if ($order->status !== 'pending') {
+            return redirect()->route('user.orders')->with('error', 'Seules les commandes en attente peuvent être annulées.');
+        }
+
+        $order->status = 'cancelled';
+        $order->save();
+
+        return redirect()->route('user.orders')->with('success', 'La commande a été annulée avec succès.');
+    }
 }

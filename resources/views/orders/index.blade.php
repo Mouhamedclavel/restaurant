@@ -19,6 +19,7 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix total</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -36,8 +37,32 @@
                                             @elseif($order->status === 'completed') bg-green-100 text-green-800
                                             @else bg-red-100 text-red-800
                                             @endif">
-                                            {{ ucfirst($order->status) }}
+                                            @switch($order->status)
+                                                @case('pending')
+                                                    En attente
+                                                    @break
+                                                @case('processing')
+                                                    En cours
+                                                    @break
+                                                @case('completed')
+                                                    Terminée
+                                                    @break
+                                                @case('cancelled')
+                                                    Annulée
+                                                    @break
+                                                @default
+                                                    {{ ucfirst($order->status) }}
+                                            @endswitch
                                         </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        @if($order->status === 'pending')
+                                            <form action="{{ route('orders.cancel', $order) }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="text-red-600 hover:text-red-900">Annuler</button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

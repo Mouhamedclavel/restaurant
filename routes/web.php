@@ -68,3 +68,5 @@ Route::get('/menus/{menuItem}', [MenuController::class, 'show'])->name('menus.sh
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store')->middleware('auth');
 
 Route::get('/mes-commandes', [UserOrderController::class, 'index'])->name('user.orders')->middleware('auth');
+
+Route::patch('/orders/{order}/cancel', [UserOrderController::class, 'cancel'])->name('orders.cancel')->middleware('auth');
