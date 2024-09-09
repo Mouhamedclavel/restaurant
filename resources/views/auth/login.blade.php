@@ -5,12 +5,21 @@
     <div class="w-full max-w-sm bg-white rounded-lg shadow-md overflow-hidden">
         <div class="px-4 py-3">
             <h2 class="text-xl font-light text-center text-soft-text mb-4">Connexion</h2>
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="space-y-3">
                     <div>
                         <label for="email" class="block text-xs font-medium text-soft-text mb-1">Email</label>
-                        <input type="email" name="email" id="email" class="w-full px-2 py-1 text-sm border border-soft-secondary rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-soft-primary focus:border-soft-primary" required>
+                        <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full px-2 py-1 text-sm border border-soft-secondary rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-soft-primary focus:border-soft-primary" required>
                     </div>
                     <div>
                         <label for="password" class="block text-xs font-medium text-soft-text mb-1">Mot de passe</label>

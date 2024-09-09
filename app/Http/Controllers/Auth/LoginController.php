@@ -25,8 +25,8 @@ class LoginController extends Controller
             if ($user->status === 'disable') {
                 Auth::logout();
                 return back()->withErrors([
-                    'email' => 'Votre compte a été désactivé. Veuillez contacter l\'administrateur.',
-                ]);
+                    'email' => 'Votre compte a été désactivé. Veuillez contacter l\'administrateur pour plus d\'informations.',
+                ])->withInput();
             }
 
             $request->session()->regenerate();
@@ -36,7 +36,7 @@ class LoginController extends Controller
 
         return back()->withErrors([
             'email' => 'Les identifiants fournis ne correspondent pas à nos enregistrements.',
-        ])->onlyInput('email');
+        ])->withInput();
     }
 
     public function logout(Request $request)
