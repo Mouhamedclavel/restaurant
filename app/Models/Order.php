@@ -11,9 +11,10 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
+        'menu_item_id',
+        'quantity',
+        'price',
         'status',
-        'total',
-        // Ajoutez d'autres champs selon vos besoins
     ];
 
     public function user()
@@ -21,5 +22,8 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Ajoutez d'autres relations ou méthodes si nécessaire
+    public function menuItem()
+    {
+        return $this->belongsTo(MenuItem::class);
+    }
 }

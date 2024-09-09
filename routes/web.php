@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +66,5 @@ Route::get('/menus', [MenuController::class, 'available'])->name('menus.availabl
 Route::get('/menus/{menuItem}', [MenuController::class, 'show'])->name('menus.show');
 
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store')->middleware('auth');
+
+Route::get('/mes-commandes', [UserOrderController::class, 'index'])->name('user.orders')->middleware('auth');
