@@ -32,3 +32,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/admin-only', function () {
     // Contenu réservé aux administrateurs
 })->middleware('role:admin');
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/manage-managers', [DashboardController::class, 'manageManagers'])->name('manage.managers');
+    Route::get('/manage-customers', [DashboardController::class, 'manageCustomers'])->name('manage.customers');
+});
+
+Route::post('/toggle-user-status/{user}', [DashboardController::class, 'toggleUserStatus'])->name('toggle.user.status');

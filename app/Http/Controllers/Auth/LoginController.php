@@ -21,6 +21,14 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->status === 'disable') {
+                Auth::logout();
+                return back()->withErrors([
+                    'email' => 'Votre compte a été désactivé. Veuillez contacter l\'administrateur.',
+                ]);
+            }
+
             $request->session()->regenerate();
 
             return redirect()->route('dashboard');
@@ -39,6 +47,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

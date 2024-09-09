@@ -30,10 +30,10 @@ class RegisterController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'customer', // Rôle par défaut
+            'role' => 'customer',
+            'status' => 'enable', // Ajout du statut par défaut
         ]);
 
-        // Rediriger vers la page de connexion ou connecter l'utilisateur directement
         return redirect()->route('login')->with('success', 'Inscription réussie. Veuillez vous connecter.');
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('role', ['customer', 'admin', 'manager'])->default('customer');
+            $table->enum('status', ['enable', 'disable'])->default('enable');
             $table->timestamps();
         });
     }

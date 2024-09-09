@@ -21,6 +21,7 @@
             }
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style type="text/tailwindcss">
         @layer utilities {
             .bg-custom-btn {
@@ -34,9 +35,7 @@
 </head>
 <body class="bg-soft-bg text-soft-text h-full">
     <div id="app" class="h-full flex flex-col">
-        <main class="flex-grow flex items-center justify-center">
-            @yield('content')
-        </main>
+        @yield('content')
     </div>
 </body>
 </html>
