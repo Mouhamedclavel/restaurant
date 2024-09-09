@@ -16,7 +16,13 @@
                         <a href="{{ route('manage.customers') }}" class="{{ request()->routeIs('manage.customers') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Gestion des clients
                         </a>
+                        <a href="{{ route('menu.index') }}" class="{{ request()->routeIs('menu.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Gestion des menus
+                        </a>
                     @elseif($user->role === 'manager')
+                        <a href="{{ route('menu.index') }}" class="{{ request()->routeIs('menu.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Gestion des menus
+                        </a>
                         <a href="#" class="{{ request()->is('projects*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Gestion des projets
                         </a>
