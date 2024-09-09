@@ -57,3 +57,5 @@ Route::middleware(['auth', 'role:admin,manager'])->group(function () {
 Route::middleware(['auth', 'role:admin,manager'])->group(function () {
     Route::resource('tables', TableController::class);
 });
+
+Route::get('/tables/{table}/edit', [TableController::class, 'edit']);

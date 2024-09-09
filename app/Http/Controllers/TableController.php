@@ -10,7 +10,8 @@ class TableController extends Controller
     public function index()
     {
         $tables = Table::all();
-        return view('tables.index', compact('tables'));
+        $locations = Table::LOCATIONS;
+        return view('tables.index', compact('tables', 'locations'));
     }
 
     public function create()
@@ -28,15 +29,18 @@ class TableController extends Controller
             'is_available' => 'boolean',
         ]);
 
-        Table::create($validatedData);
+        $table = Table::create($validatedData);
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'table' => $table]);
+        }
 
         return redirect()->route('tables.index')->with('success', 'Table ajoutée avec succès.');
     }
 
     public function edit(Table $table)
     {
-        $locations = Table::LOCATIONS;
-        return view('tables.edit', compact('table', 'locations'));
+        return response()->json($table);
     }
 
     public function update(Request $request, Table $table)
@@ -49,6 +53,10 @@ class TableController extends Controller
         ]);
 
         $table->update($validatedData);
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'table' => $table]);
+        }
 
         return redirect()->route('tables.index')->with('success', 'Table mise à jour avec succès.');
     }
