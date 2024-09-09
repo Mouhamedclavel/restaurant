@@ -42,9 +42,18 @@ class MenuController extends Controller
         return redirect()->route('menu.index')->with('success', 'Item ajouté au menu avec succès.');
     }
 
+    public function available()
+    {
+        $user = auth()->user();
+        $availableMenus = MenuItem::where('is_available', true)
+                              ->paginate(12);
 
+        return view('menus.available', compact('user', 'availableMenus'));
+    }
 
-
-
-  
+    public function show(MenuItem $menuItem)
+    {
+        $user = auth()->user();
+        return view('menus.show', compact('user', 'menuItem'));
+    }
 }

@@ -59,3 +59,6 @@ Route::middleware(['auth', 'role:admin,manager'])->group(function () {
 });
 
 Route::get('/tables/{table}/edit', [TableController::class, 'edit']);
+
+Route::get('/menus', [MenuController::class, 'available'])->name('menus.available');
+Route::get('/menus/{menuItem}', [MenuController::class, 'show'])->name('menus.show');
