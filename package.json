@@ -1,0 +1,11 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "php artisan serve",
+        "build": "echo 'No build step required for CDN usage'"
+    },
+    "devDependencies": {
+        "axios": "^1.6.4"
+    }
+}
