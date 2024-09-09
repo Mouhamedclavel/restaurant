@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +63,5 @@ Route::get('/tables/{table}/edit', [TableController::class, 'edit']);
 
 Route::get('/menus', [MenuController::class, 'available'])->name('menus.available');
 Route::get('/menus/{menuItem}', [MenuController::class, 'show'])->name('menus.show');
+
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store')->middleware('auth');
