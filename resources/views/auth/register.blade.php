@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-sm mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+<div class="w-full max-w-sm bg-white rounded-lg shadow-md overflow-hidden">
     <div class="px-4 py-3">
         <h2 class="text-xl font-light text-center text-soft-text mb-4">Inscription</h2>
         <form method="POST" action="{{ route('register') }}">
@@ -38,6 +38,10 @@
                 </button>
             </div>
         </form>
+        <div class="mt-4 text-center text-sm">
+            <p class="text-soft-text">Vous avez déjà un compte ?</p>
+            <a href="{{ route('login') }}" class="text-custom-btn hover:underline">Connectez-vous ici</a>
+        </div>
     </div>
 </div>
 @endsection

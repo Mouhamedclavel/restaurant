@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,9 +32,9 @@
         }
     </style>
 </head>
-<body class="bg-soft-bg text-soft-text">
-    <div id="app" class="min-h-screen flex flex-col">
-        <main class="flex-grow container mx-auto px-4 py-8">
+<body class="bg-soft-bg text-soft-text h-full">
+    <div id="app" class="h-full flex flex-col">
+        <main class="flex-grow flex items-center justify-center">
             @yield('content')
         </main>
     </div>
