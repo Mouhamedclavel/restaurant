@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\TableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,4 +52,8 @@ Route::middleware(['auth', 'role:admin,manager'])->group(function () {
     Route::get('/menu/{menuItem}/edit', [MenuController::class, 'edit'])->name('menu.edit');
     Route::put('/menu/{menuItem}', [MenuController::class, 'update'])->name('menu.update');
     Route::delete('/menu/{menuItem}', [MenuController::class, 'destroy'])->name('menu.destroy');
+});
+
+Route::middleware(['auth', 'role:admin,manager'])->group(function () {
+    Route::resource('tables', TableController::class);
 });

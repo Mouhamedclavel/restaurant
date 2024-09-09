@@ -19,12 +19,15 @@
                         <a href="{{ route('menu.index') }}" class="{{ request()->routeIs('menu.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Gestion des menus
                         </a>
+                        <a href="{{ route('tables.index') }}" class="{{ request()->routeIs('tables.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Gestion des tables
+                        </a>
                     @elseif($user->role === 'manager')
                         <a href="{{ route('menu.index') }}" class="{{ request()->routeIs('menu.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Gestion des menus
                         </a>
-                        <a href="#" class="{{ request()->is('projects*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Gestion des projets
+                        <a href="{{ route('tables.index') }}" class="{{ request()->routeIs('tables.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            Gestion des tables
                         </a>
                         <a href="#" class="{{ request()->is('reports*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Rapports
