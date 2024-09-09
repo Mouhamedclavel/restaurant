@@ -30,6 +30,7 @@ class RegisterController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'customer', // Rôle par défaut
         ]);
 
         // Rediriger vers la page de connexion ou connecter l'utilisateur directement
