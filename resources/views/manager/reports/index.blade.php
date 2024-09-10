@@ -4,8 +4,6 @@
     @include('partials.dashboard_navbar', ['user' => auth()->user()])
     <main class="flex-grow">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <h1 class="text-2xl font-semibold mb-6">Rapports</h1>
-
             <form action="{{ route('manager.reports.index') }}" method="GET" class="mb-6">
                 <div class="flex items-center space-x-4">
                     <div>
@@ -25,21 +23,29 @@
             </form>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white shadow-md rounded-lg p-6">
-                    <h2 class="text-xl font-semibold mb-4">Commandes par jour</h2>
-                    <canvas id="dailyOrdersChart"></canvas>
+                <div class="bg-white shadow-md rounded-lg p-4">
+                    <h2 class="text-lg font-semibold mb-2">Commandes par jour</h2>
+                    <div style="height: 200px;">
+                        <canvas id="dailyOrdersChart"></canvas>
+                    </div>
                 </div>
-                <div class="bg-white shadow-md rounded-lg p-6">
-                    <h2 class="text-xl font-semibold mb-4">Commandes par mois</h2>
-                    <canvas id="monthlyOrdersChart"></canvas>
+                <div class="bg-white shadow-md rounded-lg p-4">
+                    <h2 class="text-lg font-semibold mb-2">Commandes par mois</h2>
+                    <div style="height: 200px;">
+                        <canvas id="monthlyOrdersChart"></canvas>
+                    </div>
                 </div>
-                <div class="bg-white shadow-md rounded-lg p-6">
-                    <h2 class="text-xl font-semibold mb-4">Réservations par jour</h2>
-                    <canvas id="dailyReservationsChart"></canvas>
+                <div class="bg-white shadow-md rounded-lg p-4">
+                    <h2 class="text-lg font-semibold mb-2">Réservations par jour</h2>
+                    <div style="height: 200px;">
+                        <canvas id="dailyReservationsChart"></canvas>
+                    </div>
                 </div>
-                <div class="bg-white shadow-md rounded-lg p-6">
-                    <h2 class="text-xl font-semibold mb-4">Réservations par mois</h2>
-                    <canvas id="monthlyReservationsChart"></canvas>
+                <div class="bg-white shadow-md rounded-lg p-4">
+                    <h2 class="text-lg font-semibold mb-2">Réservations par mois</h2>
+                    <div style="height: 200px;">
+                        <canvas id="monthlyReservationsChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,6 +73,8 @@
                     }]
                 },
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             beginAtZero: true
