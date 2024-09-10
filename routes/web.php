@@ -10,6 +10,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserOrderController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserReservationController;
+use App\Http\Controllers\ManagerReservationController;
+use App\Http\Controllers\ManagerOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,3 +79,13 @@ Route::post('/reservations', [ReservationController::class, 'store'])->name('res
 
 Route::get('/mes-reservations', [UserReservationController::class, 'index'])->name('user.reservations')->middleware('auth');
 Route::patch('/reservations/{reservation}/cancel', [UserReservationController::class, 'cancel'])->name('reservations.cancel')->middleware('auth');
+
+Route::middleware(['auth', 'role:manager'])->group(function () {
+    Route::get('/manager/reservations', [ManagerReservationController::class, 'index'])->name('manager.reservations.index');
+    Route::patch('/manager/reservations/{reservation}/update-status', [ManagerReservationController::class, 'updateStatus'])->name('manager.reservations.update-status');
+});
+
+Route::middleware(['auth', 'role:manager'])->group(function () {
+    Route::get('/manager/orders', [ManagerOrderController::class, 'index'])->name('manager.orders.index');
+    Route::patch('/manager/orders/{order}/update-status', [ManagerOrderController::class, 'updateStatus'])->name('manager.orders.update-status');
+});

@@ -28,7 +28,7 @@
                 background-color: #056ae7;
             }
             .hover\:bg-custom-btn-hover:hover {
-                background-color: #0456b9;
+                background-color: #000;
             }
         }
     </style>
