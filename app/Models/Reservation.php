@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Reservation extends Model
 {
@@ -17,6 +18,15 @@ class Reservation extends Model
         'number_of_guests',
         'status',
     ];
+
+    protected $casts = [
+        'reservation_date' => 'date',
+    ];
+
+    public function getFormattedReservationDateAttribute()
+    {
+        return Carbon::parse($this->reservation_date)->format('d/m/Y');
+    }
 
     public function user()
     {
