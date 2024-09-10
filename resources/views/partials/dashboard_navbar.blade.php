@@ -35,7 +35,7 @@
                         <a href="{{ route('manager.orders.index') }}" class="{{ request()->routeIs('manager.orders.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Gestion des commandes
                         </a>
-                        <a href="#" class="{{ request()->is('reports*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="{{ route('manager.reports.index') }}" class="{{ request()->routeIs('manager.reports.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Rapports
                         </a>
                     @else

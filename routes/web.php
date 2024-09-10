@@ -12,6 +12,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserReservationController;
 use App\Http\Controllers\ManagerReservationController;
 use App\Http\Controllers\ManagerOrderController;
+use App\Http\Controllers\ManagerReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,4 +89,8 @@ Route::middleware(['auth', 'role:manager'])->group(function () {
 Route::middleware(['auth', 'role:manager'])->group(function () {
     Route::get('/manager/orders', [ManagerOrderController::class, 'index'])->name('manager.orders.index');
     Route::patch('/manager/orders/{order}/update-status', [ManagerOrderController::class, 'updateStatus'])->name('manager.orders.update-status');
+});
+
+Route::middleware(['auth', 'role:manager'])->group(function () {
+    Route::get('/manager/reports', [ManagerReportController::class, 'index'])->name('manager.reports.index');
 });
