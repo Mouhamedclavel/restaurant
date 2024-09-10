@@ -9,15 +9,25 @@ class Table extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['number', 'location', 'capacity', 'is_available'];
-
-    protected $casts = [
-        'is_available' => 'boolean',
-    ];
-
     const LOCATIONS = [
         'intérieur' => 'Intérieur',
         'extérieur' => 'Extérieur',
         'bar' => 'Bar'
     ];
+
+    protected $fillable = [
+        'number',
+        'capacity',
+        'is_available',
+        'location'
+    ];
+
+    protected $casts = [
+        'is_available' => 'boolean',
+    ];
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }

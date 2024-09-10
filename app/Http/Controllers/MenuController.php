@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MenuItem;
+use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -45,10 +46,10 @@ class MenuController extends Controller
     public function available()
     {
         $user = auth()->user();
-        $availableMenus = MenuItem::where('is_available', true)
-                              ->paginate(12);
+        $availableMenus = MenuItem::where('is_available', true)->paginate(12);
+        $availableTables = Table::where('is_available', true)->get();
 
-        return view('menus.available', compact('user', 'availableMenus'));
+        return view('menus.available', compact('user', 'availableMenus', 'availableTables'));
     }
 
     public function show(MenuItem $menuItem)

@@ -8,6 +8,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserOrderController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,3 +71,5 @@ Route::post('/orders', [OrderController::class, 'store'])->name('orders.store')-
 Route::get('/mes-commandes', [UserOrderController::class, 'index'])->name('user.orders')->middleware('auth');
 
 Route::patch('/orders/{order}/cancel', [UserOrderController::class, 'cancel'])->name('orders.cancel')->middleware('auth');
+
+Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store')->middleware('auth');
