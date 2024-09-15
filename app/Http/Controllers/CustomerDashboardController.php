@@ -11,7 +11,19 @@ class CustomerDashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
+        
+        $orderCounts = Order::where('user_id', $user->id)
+            ->selectRaw('status, count(*) as count')
+            ->groupBy('status')
+            ->pluck('count', 'status')
+            ->toArray();
+
+        $pendingOrdersCount = $orderCounts['pending'] ?? 0;
+        $completedOrdersCount = $orderCounts['completed'] ?? 0;
+        $cancelledOrdersCount = $orderCounts['cancelled'] ?? 0;
+        
         $recentOrders = Order::where('user_id', $user->id)
+                             ->with('menuItem')
                              ->orderBy('created_at', 'desc')
                              ->take(5)
                              ->get();
@@ -20,17 +32,13 @@ class CustomerDashboardController extends Controller
                               ->take(4)
                               ->get();
 
-        $pendingOrdersCount = Order::where('user_id', $user->id)->where('status', 'pending')->count();
-        $completedOrdersCount = Order::where('user_id', $user->id)->where('status', 'completed')->count();
-        $cancelledOrdersCount = Order::where('user_id', $user->id)->where('status', 'cancelled')->count();
-
         return view('dashboard.customer', compact(
             'user',
-            'recentOrders',
-            'availableMenus',
             'pendingOrdersCount',
             'completedOrdersCount',
-            'cancelledOrdersCount'
+            'cancelledOrdersCount',
+            'recentOrders',
+            'availableMenus'
         ));
     }
 }

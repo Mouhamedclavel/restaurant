@@ -24,32 +24,29 @@
                         </a>
                     @elseif($user->role === 'manager')
                         <a href="{{ route('menu.index') }}" class="{{ request()->routeIs('menu.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Gestion des menus
+                            menus
                         </a>
                         <a href="{{ route('tables.index') }}" class="{{ request()->routeIs('tables.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Gestion des tables
+                            tables
                         </a>
                         <a href="{{ route('manager.reservations.index') }}" class="{{ request()->routeIs('manager.reservations.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Gestion des réservations
+                            réservations
                         </a>
                         <a href="{{ route('manager.orders.index') }}" class="{{ request()->routeIs('manager.orders.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Gestion des commandes
+                            commandes
                         </a>
                         <a href="{{ route('manager.reports.index') }}" class="{{ request()->routeIs('manager.reports.*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             Rapports
                         </a>
                     @else
                         <a href="{{ route('user.orders') }}" class="{{ request()->routeIs('user.orders') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Mes commandes
+                            commandes
                         </a>
                         <a href="{{ route('user.reservations') }}" class="{{ request()->routeIs('user.reservations') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Mes réservations
+                            réservations
                         </a>
                         <a href="{{ route('menus.available') }}" class="{{ request()->routeIs('menus.available') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Menus disponibles
-                        </a>
-                        <a href="#" class="{{ request()->is('profile*') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            Mon profil
+                            Menus
                         </a>
                     @endif
                 </div>
