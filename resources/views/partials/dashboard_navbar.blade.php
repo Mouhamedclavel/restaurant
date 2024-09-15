@@ -40,7 +40,7 @@
                         </a>
                     @else
                         <a href="{{ route('user.orders') }}" class="{{ request()->routeIs('user.orders') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                           Antonio
+                           Commandes
                         </a>
                         <a href="{{ route('user.reservations') }}" class="{{ request()->routeIs('user.reservations') ? 'border-custom-btn' : 'border-transparent' }} text-soft-text hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             réservations
