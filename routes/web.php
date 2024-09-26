@@ -25,9 +25,11 @@ use App\Http\Controllers\ManagerReportController;
 |
 */
 
+// Rediriger la route '/' vers '/login'
+Route::get('/', function () {
+    return redirect('/login');
+});
 
-
-// Route::get('/', [RegisterController::class, 'login'])->name('register');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
