@@ -35,7 +35,7 @@
                                 <tr class="hover:bg-gray-50 hover:bg-opacity-90">
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $item->name }}</td>
                                     <td class="px-6 py-4">{{ Str::limit($item->description, 50) }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ number_format($item->price, 2) }} €</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ number_format($item->price, 2) }} FCFA</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $item->category }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $item->is_available ? 'Oui' : 'Non' }}</td>
                                     <td class="px-6 py-4">

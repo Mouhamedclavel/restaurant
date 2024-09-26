@@ -6,61 +6,78 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\MenuItem;
+use App\Models\Reservation;
+use App\Models\Table;
 
 class DashboardController extends Controller
 {
-    public function index()
+  public function index()
     {
         $user = auth()->user();
-        $view = 'dashboard.' . $user->role;
+        $viewName = 'dashboard.' . $user->role;
 
-        if ($user->role === 'admin') {
-            // Comptes pour les clients et les managers
-            $customerCount = User::where('role', 'customer')->where('status', 'enable')->count();
-            $managerCount = User::where('role', 'manager')->where('status', 'enable')->count();
-            $recentCustomers = User::where('role', 'customer')->where('status', 'enable')->latest()->take(5)->get();
-            $recentManagers = User::where('role', 'manager')->where('status', 'enable')->latest()->take(5)->get();
+        $data = [
+            'user' => $user,
+        ];
 
-            return view($view, compact('user', 'customerCount', 'managerCount', 'recentCustomers', 'recentManagers'));
-        } elseif ($user->role === 'customer') {
-            // Récupérer le nombre de commandes pour chaque statut
-            $orderCounts = Order::where('user_id', $user->id)
-                ->selectRaw('status, count(*) as count')
-                ->groupBy('status')
-                ->pluck('count', 'status')
-                ->toArray();
-
-            // Initialisation des compteurs avec des valeurs par défaut
-            $pendingOrdersCount = $orderCounts['pending'] ?? 0;
-            $processingOrdersCount = $orderCounts['processing'] ?? 0;
-            $completedOrdersCount = $orderCounts['completed'] ?? 0;
-            $cancelledOrdersCount = $orderCounts['cancelled'] ?? 0;
-
-            // Commandes récentes de l'utilisateur
-            $recentOrders = Order::where('user_id', $user->id)
-                ->with('menuItem')
-                ->orderBy('created_at', 'desc')
-                ->take(5)
-                ->get();
-
-            // Menus disponibles
-            $availableMenus = MenuItem::where('is_available', true)
-                ->take(4)
-                ->get();
-
-            return view($view, compact(
-                'user',
-                'pendingOrdersCount',
-                'processingOrdersCount',
-                'completedOrdersCount',
-                'cancelledOrdersCount',
-                'recentOrders',
-                'availableMenus'
-            ));
+        switch ($user->role) {
+            case 'admin':
+                $data += $this->getAdminData();
+                break;
+            case 'manager':
+                $data += $this->getManagerData();
+                break;
+            case 'customer':
+                $data += $this->getCustomerData($user->id);
+                break;
         }
 
-        return view($view, compact('user'));
+        return view($viewName, $data);
     }
+
+    private function getAdminData()
+    {
+        return [
+            'customerCount' => User::where('role', 'customer')->where('status', 'enable')->count(),
+            'managerCount' => User::where('role', 'manager')->where('status', 'enable')->count(),
+            'recentCustomers' => User::where('role', 'customer')->where('status', 'enable')->latest()->take(5)->get(),
+            'recentManagers' => User::where('role', 'manager')->where('status', 'enable')->latest()->take(5)->get(),
+            'reservationsCount' => Reservation::count(),
+        ];
+    }
+
+    private function getManagerData()
+    {
+        return [
+            'reservationsCount' => Reservation::count(),
+            'ordersCount' => Order::count(),
+            'tablesCount' => Table::count(),
+            'menusCount' => MenuItem::count(),
+            'recentOrders' => Order::with('menuItem')->latest()->take(2)->get(), // Changed from 5 to 2
+            'availableMenus' => MenuItem::where('is_available', true)->take(2)->get(), 
+        ];
+    }
+
+    private function getCustomerData($userId)
+    {
+        $orderCounts = Order::where('user_id', $userId)
+            ->selectRaw('status, count(*) as count')
+            ->groupBy('status')
+            ->pluck('count', 'status')
+            ->toArray();
+
+        return [
+            'pendingOrdersCount' => $orderCounts['pending'] ?? 0,
+            'processingOrdersCount' => $orderCounts['processing'] ?? 0,
+            'completedOrdersCount' => $orderCounts['completed'] ?? 0,
+            'cancelledOrdersCount' => $orderCounts['cancelled'] ?? 0,
+            'recentOrders' => Order::where('user_id', $userId)->with('menuItem')->latest()->take(5)->get(),
+            'availableMenus' => MenuItem::where('is_available', true)->take(4)->get(),
+        ];
+    }
+
+    
+
     public function manageManagers()
     {
         $user = auth()->user();
@@ -82,5 +99,19 @@ class DashboardController extends Controller
 
         $message = $user->status === 'enable' ? 'débloqué' : 'bloqué';
         return back()->with('success', "L'utilisateur a été $message avec succès.");
+    }
+
+    public function manageOrders()
+    {
+        $user = auth()->user();
+        $orders = Order::with('menuItem')->get();
+        return view('dashboard.manage_orders', compact('user', 'orders'));
+    }
+
+    public function manageMenus()
+    {
+        $user = auth()->user();
+        $menus = MenuItem::all();
+        return view('dashboard.manage_menus', compact('user', 'menus'));
     }
 }
