@@ -61,4 +61,26 @@ class DashboardController extends Controller
 
         return view($view, compact('user'));
     }
+    public function manageManagers()
+    {
+        $user = auth()->user();
+        $managers = User::where('role', 'manager')->get();
+        return view('dashboard.manage_managers', compact('user', 'managers'));
+    }
+
+    public function manageCustomers()
+    {
+        $user = auth()->user();
+        $customers = User::where('role', 'customer')->get();
+        return view('dashboard.manage_customers', compact('user', 'customers'));
+    }
+
+    public function toggleUserStatus(User $user)
+    {
+        $user->status = $user->status === 'enable' ? 'disable' : 'enable';
+        $user->save();
+
+        $message = $user->status === 'enable' ? 'débloqué' : 'bloqué';
+        return back()->with('success', "L'utilisateur a été $message avec succès.");
+    }
 }
