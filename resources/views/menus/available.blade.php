@@ -2,18 +2,24 @@
 
 @section('content')
     @include('partials.dashboard_navbar', ['user' => $user])
-    <main class="flex-grow">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <main class="flex-grow relative min-h-screen">
+        <!-- Image d'arrière-plan -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://s3-alpha-sig.figma.com/img/50f1/de24/70c618c674904eddc922480f3caca474?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SOjcfTU3a3qfGdutlhKAT~zdAOrMpDhTaRCLFg1MDD6OKPoF5Jy2ksy~MGsu1yi2qgqdVfBtec-3fRlCmmUcPz6Jr6NyvQpbTLOX6FRdwy~LhJMTKwpnDMh9RkC5HjuNHuYw-BizbU7WHl4LXHEmHrTEDcRuqlpwkn5xrOX7sM9kNHunCFZke-PpVAQFmTBXUAp1xvOJHDAcInUnO8qgI3mP7CHvd~2756098rj5LFstt~cRhIDhAK5yl7bvcnQ3utGlTwUDU6AH6fAPQyDOHgT5p2LPs34Iou~34wN3j~V-hOqJR4FCoxutf-4WemjWclwCbl~I472HuOr2h8A2KA__');"></div>
+
+        <!-- Overlay pour améliorer la lisibilité -->
+        <div class="absolute inset-0 bg-black opacity-60 z-10"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-20">
             <div class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-semibold">Menus disponibles</h1>
-                <button onclick="openReservationModal()" class="bg-custom-btn hover:bg-custom-btn-hover text-white text-sm font-medium py-2 px-4 rounded">
+                <h1 class="text-3xl font-semibold text-white">Menus disponibles</h1>
+                <button onclick="openReservationModal()" class="bg-custom-btn hover:bg-custom-btn-hover text-white text-sm font-medium py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105">
                     Réserver une table
                 </button>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @forelse ($availableMenus as $menu)
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-white bg-opacity-80 rounded-lg shadow-md overflow-hidden backdrop-blur-sm transition duration-300 ease-in-out transform hover:scale-105">
                         @if($menu->photo)
                             <img src="{{ asset('storage/' . $menu->photo) }}" alt="{{ $menu->name }}" class="w-full h-48 object-cover">
                         @else
@@ -26,14 +32,14 @@
                             <p class="text-gray-600 mb-4">{{ Str::limit($menu->description, 100) }}</p>
                             <div class="flex justify-between items-center">
                                 <span class="text-lg font-bold text-custom-btn">{{ number_format($menu->price, 0, ',', ' ') }} FCFA</span>
-                                <button onclick="openOrderModal({{ $menu->id }}, '{{ $menu->name }}', {{ $menu->price }})" class="bg-custom-btn hover:bg-custom-btn-hover text-white text-sm font-medium py-2 px-4 rounded">
+                                <button onclick="openOrderModal({{ $menu->id }}, '{{ $menu->name }}', {{ $menu->price }})" class="bg-custom-btn hover:bg-custom-btn-hover text-white text-sm font-medium py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105">
                                     Commander
                                 </button>
                             </div>
                         </div>
                     </div>
                 @empty
-                    <p class="col-span-full text-center text-gray-500">Aucun menu disponible pour le moment.</p>
+                    <p class="col-span-full text-center text-white text-lg">Aucun menu disponible pour le moment.</p>
                 @endforelse
             </div>
 
@@ -44,7 +50,7 @@
     </main>
 
     <!-- Modal de commande -->
-    <div id="orderModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div id="orderModal" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
@@ -65,10 +71,10 @@
                         </div>
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-btn text-base font-medium text-white hover:bg-custom-btn-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn sm:ml-3 sm:w-auto sm:text-sm">
+                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-btn text-base font-medium text-white hover:bg-custom-btn-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn sm:ml-3 sm:w-auto sm:text-sm transition duration-300 ease-in-out transform hover:scale-105">
                             Confirmer la commande
                         </button>
-                        <button type="button" onclick="closeOrderModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        <button type="button" onclick="closeOrderModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition duration-300 ease-in-out transform hover:scale-105">
                             Annuler
                         </button>
                     </div>
@@ -78,7 +84,7 @@
     </div>
 
     <!-- Modal de réservation -->
-    <div id="reservationModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div id="reservationModal" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
@@ -116,10 +122,10 @@
                         </div>
                     </div>
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-btn text-base font-medium text-white hover:bg-custom-btn-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn sm:ml-3 sm:w-auto sm:text-sm">
+                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-custom-btn text-base font-medium text-white hover:bg-custom-btn-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn sm:ml-3 sm:w-auto sm:text-sm transition duration-300 ease-in-out transform hover:scale-105">
                             Confirmer la réservation
                         </button>
-                        <button type="button" onclick="closeReservationModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        <button type="button" onclick="closeReservationModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-btn sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition duration-300 ease-in-out transform hover:scale-105">
                             Annuler
                         </button>
                     </div>

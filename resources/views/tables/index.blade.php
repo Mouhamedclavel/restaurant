@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     @include('partials.dashboard_navbar', ['user' => $user])
     <main class="flex-grow">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">

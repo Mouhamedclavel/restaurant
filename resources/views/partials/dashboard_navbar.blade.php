@@ -9,7 +9,7 @@
         <div class="flex justify-between h-14">
             <div class="flex">
                 <div class="flex-shrink-0 flex items-center">
-                    <img src="https://s3-alpha-sig.figma.com/img/7629/5147/7a0ffa143ec5e0a7d0839dce5cceac0f?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nKGzTMOrnKQ71OZjNKIUYJt5N2pevwPHgMW7NKf2GsWTt9mAV8fOe16y2VntC8tgICDW0GarltYSHK5JeF9wpnsGQugbeEj5vNX3Ivvr5S0dCbBclCQZLlvcOyAF7~ECl6Go-xRVb8bAKh~-UAwh75Nf408BQVYs~pPpTQvVVmThGHcXt~Zyr~7P87aeN2~JRykjDWeRbcGM2GVMYaq13J0NJPwvPkztEUxexw8ryX9XjVU-lPpFoWN-NdhFpxvM11sN14jMe9YfAaELt4vI~IZcGhCngKPgFMSydQAnR-SNCxcEfB3D5FP1Wwx~8QebOJawmYXNnsXMEKjSpTLbQg__" alt="Logo" class="h-8 w-auto">
+                        <img src="https://s3-alpha-sig.figma.com/img/7629/5147/7a0ffa143ec5e0a7d0839dce5cceac0f?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=nKGzTMOrnKQ71OZjNKIUYJt5N2pevwPHgMW7NKf2GsWTt9mAV8fOe16y2VntC8tgICDW0GarltYSHK5JeF9wpnsGQugbeEj5vNX3Ivvr5S0dCbBclCQZLlvcOyAF7~ECl6Go-xRVb8bAKh~-UAwh75Nf408BQVYs~pPpTQvVVmThGHcXt~Zyr~7P87aeN2~JRykjDWeRbcGM2GVMYaq13J0NJPwvPkztEUxexw8ryX9XjVU-lPpFoWN-NdhFpxvM11sN14jMe9YfAaELt4vI~IZcGhCngKPgFMSydQAnR-SNCxcEfB3D5FP1Wwx~8QebOJawmYXNnsXMEKjSpTLbQg__" alt="Logo" class="h-12 w-auto rounded-full mr-2"><span class="text-white text-sm">  Restaurant</span>
                 </div>
                 <div class="hidden sm:ml-4 sm:flex sm:space-x-6">
                     <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'border-custom-btn' : 'border-transparent' }} text-white hover:border-custom-btn-hover hover:text-custom-btn-hover inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
