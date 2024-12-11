@@ -57,7 +57,9 @@ Route::middleware(['auth', 'role:admin,manager'])->group(function () {
     Route::post('/menu', [MenuController::class, 'store'])->name('menu.store');
     Route::get('/menu/{menuItem}/edit', [MenuController::class, 'edit'])->name('menu.edit');
     Route::put('/menu/{menuItem}', [MenuController::class, 'update'])->name('menu.update');
-    Route::delete('/menu/{menuItem}', [MenuController::class, 'destroy'])->name('menu.destroy');
+    // Supprimer un item
+    Route::delete('/menu/{menuItem}', [MenuController::class, 'destroy'])
+        ->name('menu.destroy');
 });
 
 Route::middleware(['auth', 'role:admin,manager'])->group(function () {
